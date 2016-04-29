@@ -9,9 +9,7 @@ namespace WebRole.Models
     internal class Game : TableEntity
     {
         internal DateTime StartTime { get; set; }
-
-        internal DateTime EndTime { get; set; }
-
+        
         internal string RoomName { get; set; }
 
         internal string GameId { get; private set; }
@@ -26,14 +24,24 @@ namespace WebRole.Models
             }
         }
 
-        internal Game()
+        private Game(DateTime startTime, string room)
         {
-            GameId = Guid.NewGuid().ToString();
+            const string format = "yyyyMMddHHmm";
+
+            GameId = StartTime.ToString(format);
 
             RowKey = GameId;
 
-            PartitionKey = StartTime.ToLongDateString();
+            PartitionKey = StartTime.ToString(format);
         }
+
+        internal static Game Create(DateTime startTime, string room)
+        {
+            var game = new Game(startTime, room);
+
+            return game;
+        }
+
 
         internal void AddPlayer(Player player)
         {
