@@ -200,6 +200,7 @@
     <Compile Include="Models\GameEntry.cs" />
     <Compile Include="Models\IDataModel.cs" />
     <Compile Include="Models\IGame.cs" />
+    <Compile Include="Models\IGameEntry.cs" />
     <Compile Include="Models\IPlayer.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
