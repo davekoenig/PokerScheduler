@@ -5,6 +5,8 @@ namespace WebRole.Models
 {
     public class GameEntryEntity : TableEntity, IGameEntry
     {
+        public string Id => $"{GameId}-{PlayerId}";
+
         public string GameId { get; set; }
 
         public string PlayerId { get; set; }

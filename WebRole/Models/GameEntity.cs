@@ -12,7 +12,7 @@ namespace WebRole.Models
         
         public string RoomName { get; set; }
 
-        public string GameId { get; private set; }
+        public string Id { get; private set; }
 
         private HashSet<IPlayer> _players = new HashSet<IPlayer>();
 
@@ -28,9 +28,9 @@ namespace WebRole.Models
         {
             const string format = "yyyyMMddHHmm";
 
-            GameId = StartTime.ToString(format);
+            Id = StartTime.ToString(format);
 
-            RowKey = GameId;
+            RowKey = Id;
 
             PartitionKey = StartTime.ToString(format);
         }

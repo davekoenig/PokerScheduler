@@ -2,5 +2,6 @@
 {
     public interface IDataModel
     {
+        string Id { get; }
     }
 }

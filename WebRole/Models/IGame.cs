@@ -12,8 +12,6 @@ namespace WebRole.Models
 
         string RoomName { get; set; }
 
-        string GameId { get; }
-
         IReadOnlyCollection<IPlayer> Players { get; }
 
         void AddPlayer(IPlayer player);

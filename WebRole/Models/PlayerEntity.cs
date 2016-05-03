@@ -5,6 +5,8 @@ namespace WebRole.Models
 {
     public class PlayerEntity : TableEntity, IEquatable<IPlayer>, IPlayer
     {
+        public string Id => $"{FullName} ({Email})";
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
