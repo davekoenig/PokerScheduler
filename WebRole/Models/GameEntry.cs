@@ -3,7 +3,7 @@ using WebRole.Data;
 
 namespace WebRole.Models
 {
-    public class GameEntry : TableEntity
+    public class GameEntry : TableEntity, IDataModel
     {
         public string GameId { get; set; }
 

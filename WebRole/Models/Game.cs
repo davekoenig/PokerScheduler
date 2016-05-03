@@ -6,17 +6,17 @@ using System.Linq;
 
 namespace WebRole.Models
 {
-    internal class Game : TableEntity
+    public class Game : TableEntity, IDataModel, IGame
     {
-        internal DateTime StartTime { get; set; }
+        public DateTime StartTime { get; set; }
         
-        internal string RoomName { get; set; }
+        public string RoomName { get; set; }
 
-        internal string GameId { get; private set; }
+        public string GameId { get; private set; }
 
-        private HashSet<Player> _players = new HashSet<Player>();
+        private HashSet<IPlayer> _players = new HashSet<IPlayer>();
 
-        internal ReadOnlyCollection<Player> Players
+        public IReadOnlyCollection<IPlayer> Players
         {
             get
             {
@@ -35,7 +35,7 @@ namespace WebRole.Models
             PartitionKey = StartTime.ToString(format);
         }
 
-        internal static Game Create(DateTime startTime, string room)
+        public static Game Create(DateTime startTime, string room)
         {
             var game = new Game(startTime, room);
 
@@ -43,12 +43,12 @@ namespace WebRole.Models
         }
 
 
-        internal void AddPlayer(Player player)
+        public void AddPlayer(IPlayer player)
         {
             _players.Add(player);
         }
 
-        internal void RemovePlayer(Player player)
+        public void RemovePlayer(IPlayer player)
         {
             _players.Remove(player);
         }

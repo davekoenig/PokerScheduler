@@ -1,17 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using WebRole.Models;
 
 namespace WebRole.Data
 {
-    public interface IDataProvider<T>
+    public interface IDataProvider
     {
-        IEnumerable<T> FetchAll();
-        IEnumerable<T> FetchAll(string groupKey);
+        IEnumerable<T> FetchAll<T>() where T : IDataModel;
 
-        void Update(IEnumerable<T> inputs);
+        IEnumerable<T> FetchAll<T>(string groupKey) where T : IDataModel;
 
-        void Insert(IEnumerable<T> inputs);
+        void Update<T>(IEnumerable<T> inputs) where T : IDataModel;
 
-        void Delete(IEnumerable<T> inputs);
+        void Insert<T>(IEnumerable<T> inputs) where T : IDataModel;
+
+        void Delete<T>(IEnumerable<T> inputs) where T : IDataModel;
     }
 }

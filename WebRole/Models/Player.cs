@@ -1,17 +1,33 @@
 ﻿using Microsoft.WindowsAzure.Storage.Table;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace WebRole.Models
 {
-    internal class Player : TableEntity, IEquatable<Player>
+    public class Player : TableEntity, IEquatable<IPlayer>, IDataModel, IPlayer
     {
-        internal string FirstName { get; set; }
-        internal string LastName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
-        internal string Alias { get; set; }
+        public string FullName => $"{FirstName} {LastName}";
+
+        public string Email { get; set; }
+
+        private Player(string first, string last, string email)
+        {
+            this.FirstName = first;
+            this.LastName = last;
+            this.Email = email;
+
+            this.PartitionKey = FullName;
+            this.RowKey = Email;
+        }
+
+        public static Player Create(string first, string last, string email)
+        {
+            return new Player(first, last, email);
+        }
+
+
 
         public override bool Equals(object obj)
         {
@@ -20,7 +36,7 @@ namespace WebRole.Models
                 return false;
             }
 
-            Player other = obj as Player;
+            IPlayer other = obj as IPlayer;
             if (other == null)
             {
                 return false;
@@ -29,7 +45,7 @@ namespace WebRole.Models
             return (other.FirstName == FirstName) && (other.LastName == LastName);
         }
 
-        public bool Equals(Player other)
+        public bool Equals(IPlayer other)
         {
             if (other == null)
             {
