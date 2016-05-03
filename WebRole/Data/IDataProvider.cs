@@ -6,14 +6,14 @@ namespace WebRole.Data
 {
     public interface IDataProvider
     {
-        IEnumerable<T> FetchAll<T>() where T : IDataModel;
+        Task<IEnumerable<T>> FetchAll<T>() where T : IDataModel;
 
-        IEnumerable<T> FetchAll<T>(string groupKey) where T : IDataModel;
+        Task<IEnumerable<T>> FetchAll<T>(string groupKey) where T : IDataModel;
 
-        void Update<T>(IEnumerable<T> inputs) where T : IDataModel;
+        Task Update<T>(IEnumerable<T> inputs) where T : IDataModel;
 
-        void Insert<T>(IEnumerable<T> inputs) where T : IDataModel;
+        Task Insert<T>(IEnumerable<T> inputs) where T : IDataModel;
 
-        void Delete<T>(IEnumerable<T> inputs) where T : IDataModel;
+        Task Delete<T>(IEnumerable<T> inputs) where T : IDataModel;
     }
 }

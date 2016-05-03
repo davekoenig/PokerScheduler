@@ -3,7 +3,7 @@ using System;
 
 namespace WebRole.Models
 {
-    public class Player : TableEntity, IEquatable<IPlayer>, IDataModel, IPlayer
+    public class PlayerEntity : TableEntity, IEquatable<IPlayer>, IPlayer
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -12,7 +12,7 @@ namespace WebRole.Models
 
         public string Email { get; set; }
 
-        private Player(string first, string last, string email)
+        private PlayerEntity(string first, string last, string email)
         {
             this.FirstName = first;
             this.LastName = last;
@@ -22,9 +22,9 @@ namespace WebRole.Models
             this.RowKey = Email;
         }
 
-        public static Player Create(string first, string last, string email)
+        public static PlayerEntity Create(string first, string last, string email)
         {
-            return new Player(first, last, email);
+            return new PlayerEntity(first, last, email);
         }
 
 
@@ -55,12 +55,12 @@ namespace WebRole.Models
             return Equals((object)other);
         }
 
-        public static bool operator==(Player left, Player right)
+        public static bool operator==(PlayerEntity left, PlayerEntity right)
         {
             return left.Equals(right);
         }
 
-        public static bool operator!=(Player left, Player right)
+        public static bool operator!=(PlayerEntity left, PlayerEntity right)
         {
             return !(left == right);
         }

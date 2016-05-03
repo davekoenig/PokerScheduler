@@ -3,7 +3,7 @@ using WebRole.Data;
 
 namespace WebRole.Models
 {
-    public class GameEntry : TableEntity, IDataModel, IGameEntry
+    public class GameEntryEntity : TableEntity, IGameEntry
     {
         public string GameId { get; set; }
 
@@ -15,7 +15,7 @@ namespace WebRole.Models
 
         public Status PlayerStatus { get; set; } 
 
-        private GameEntry(string gameId, string playerId)
+        private GameEntryEntity(string gameId, string playerId)
         {
             this.GameId = gameId;
             this.PlayerId = playerId;
@@ -24,9 +24,9 @@ namespace WebRole.Models
             this.RowKey = this.PlayerId;
         }
 
-        public static GameEntry Create(string gameId, string playerId)
+        public static GameEntryEntity Create(string gameId, string playerId)
         {
-            var gameEntry = new GameEntry(gameId, playerId);
+            var gameEntry = new GameEntryEntity(gameId, playerId);
             
             return gameEntry;
         }

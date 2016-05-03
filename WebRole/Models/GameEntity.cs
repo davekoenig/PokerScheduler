@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace WebRole.Models
 {
-    public class Game : TableEntity, IDataModel, IGame
+    public class GameEntity : TableEntity, IGame
     {
         public DateTime StartTime { get; set; }
         
@@ -24,7 +24,7 @@ namespace WebRole.Models
             }
         }
 
-        private Game(DateTime startTime, string room)
+        private GameEntity(DateTime startTime, string room)
         {
             const string format = "yyyyMMddHHmm";
 
@@ -35,9 +35,9 @@ namespace WebRole.Models
             PartitionKey = StartTime.ToString(format);
         }
 
-        public static Game Create(DateTime startTime, string room)
+        public static GameEntity Create(DateTime startTime, string room)
         {
-            var game = new Game(startTime, room);
+            var game = new GameEntity(startTime, room);
 
             return game;
         }

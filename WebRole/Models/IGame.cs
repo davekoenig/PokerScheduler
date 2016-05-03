@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebRole.Models
 {
-    public interface IGame
+    public interface IGame : IDataModel
     {
         DateTime StartTime { get; set; }
 

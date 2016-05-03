@@ -10,9 +10,9 @@ namespace WebRole.Data
 
         private DataManager()
         {
-
+            Provider = new TableStorageDataProvider();
         }
 
-        public static IDataProvider Provider { get; }
+        public IDataProvider Provider { get; private set; }
     }
 }

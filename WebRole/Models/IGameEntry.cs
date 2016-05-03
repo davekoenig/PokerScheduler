@@ -2,7 +2,7 @@
 
 namespace WebRole.Models
 {
-    interface IGameEntry
+    interface IGameEntry : IDataModel
     {
         string GameId { get; set; }
 

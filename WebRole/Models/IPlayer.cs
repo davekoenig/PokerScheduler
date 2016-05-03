@@ -1,6 +1,6 @@
 ﻿namespace WebRole.Models
 {
-    public interface IPlayer
+    public interface IPlayer : IDataModel
     {
         string FirstName { get; set; }
 
