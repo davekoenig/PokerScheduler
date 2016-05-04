@@ -195,6 +195,7 @@
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Data\DataManager.cs" />
+    <Compile Include="Data\StorageMapping.cs" />
     <Compile Include="Data\TableStorageDataProvider.cs" />
     <Compile Include="Data\IDataProvider.cs" />
     <Compile Include="Data\Status.cs" />
@@ -261,7 +262,12 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\TableStorageAccessor\TableStorageAccessor.csproj">
+      <Project>{aa7d7e9b-c4dc-46c5-8cbe-a07b88502b94}</Project>
+      <Name>TableStorageAccessor</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
