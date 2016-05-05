@@ -13,6 +13,6 @@ namespace WebRole.Data
             Provider = new TableStorageDataProvider(null);
         }
 
-        public IDataProvider Provider { get; private set; }
+        public TableStorageDataProvider Provider { get; private set; }
     }
 }

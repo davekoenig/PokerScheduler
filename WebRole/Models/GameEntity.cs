@@ -16,6 +16,7 @@ namespace WebRole.Models
 
         private HashSet<IPlayer> _players = new HashSet<IPlayer>();
 
+        
         public IReadOnlyCollection<IPlayer> Players
         {
             get
@@ -24,15 +25,18 @@ namespace WebRole.Models
             }
         }
 
-        private GameEntity(DateTime startTime, string room)
+        private GameEntity(DateTime startTime, string room) : this()
         {
             const string format = "yyyyMMddHHmm";
 
             Id = StartTime.ToString(format);
+        }
 
+        public GameEntity()
+        {
             RowKey = Id;
 
-            PartitionKey = StartTime.ToString(format);
+            PartitionKey = Id;
         }
 
         public static GameEntity Create(DateTime startTime, string room)

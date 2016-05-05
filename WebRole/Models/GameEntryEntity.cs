@@ -17,13 +17,16 @@ namespace WebRole.Models
 
         public Status PlayerStatus { get; set; } 
 
-        private GameEntryEntity(string gameId, string playerId)
+        public GameEntryEntity()
+        {
+            this.PartitionKey = this.GameId;
+            this.RowKey = this.PlayerId;
+        }
+
+        private GameEntryEntity(string gameId, string playerId) : this()
         {
             this.GameId = gameId;
             this.PlayerId = playerId;
-
-            this.PartitionKey = this.GameId;
-            this.RowKey = this.PlayerId;
         }
 
         public static GameEntryEntity Create(string gameId, string playerId)

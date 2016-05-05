@@ -2,7 +2,7 @@
 
 namespace WebRole.Controllers
 {
-    public class PlayerController : DataModelController<IPlayer>
+    public class PlayerController : DataModelController<PlayerEntity>
     {
         
     }

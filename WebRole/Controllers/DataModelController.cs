@@ -7,10 +7,11 @@ using System.Web.Http;
 using System.Threading.Tasks;
 using WebRole.Models;
 using WebRole.Data;
+using Microsoft.WindowsAzure.Storage.Table;
 
 namespace WebRole.Controllers
 {
-    public abstract class DataModelController<T> : ApiController where T : IDataModel
+    public abstract class DataModelController<T> : ApiController where T : TableEntity, IDataModel, new()
     {
         [HttpGet]
         // GET: api/DataModel

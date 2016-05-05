@@ -2,7 +2,7 @@
 
 namespace WebRole.Controllers
 {
-    public class GameController : DataModelController<IGame>
+    public class GameController : DataModelController<GameEntity>
     {
        
     }

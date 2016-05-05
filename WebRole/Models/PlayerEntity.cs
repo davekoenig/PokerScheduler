@@ -14,22 +14,23 @@ namespace WebRole.Models
 
         public string Email { get; set; }
 
-        private PlayerEntity(string first, string last, string email)
+        public PlayerEntity()
+        {
+            this.PartitionKey = FullName;
+            this.RowKey = Email;
+        }
+
+        private PlayerEntity(string first, string last, string email) : this()
         {
             this.FirstName = first;
             this.LastName = last;
             this.Email = email;
-
-            this.PartitionKey = FullName;
-            this.RowKey = Email;
         }
 
         public static PlayerEntity Create(string first, string last, string email)
         {
             return new PlayerEntity(first, last, email);
         }
-
-
 
         public override bool Equals(object obj)
         {

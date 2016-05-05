@@ -1,12 +1,14 @@
 ﻿using Microsoft.SportsCloud.TableStorage;
+using Microsoft.WindowsAzure.Storage.Table;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using WebRole.Models;
 
 namespace WebRole.Data
 {
-    public class TableStorageDataProvider : IDataProvider
+    public class TableStorageDataProvider //: IDataProvider
     {
         private Dictionary<Type, TableStorageAccessor> _tableStorageAccessors = new Dictionary<Type, TableStorageAccessor>();
 
@@ -25,34 +27,45 @@ namespace WebRole.Data
             }
         }
 
-        public async Task Delete<T>(IEnumerable<T> inputs) where T : IDataModel
+        private TableStorageAccessor GetAccessor<T>()
         {
-            //var tableStorageAccessor = _tableStorageAccessors[typeof(T)];
-            
-            //tableStorageAccessor.DeleteEntitiesAsync<>
-
-
-            throw new NotImplementedException();
+            return _tableStorageAccessors[typeof(T)];
         }
 
-        public async Task<IEnumerable<T>> FetchAll<T>() where T : IDataModel
+        public async Task Delete<T>(IEnumerable<T> inputs) where T : TableEntity, new()
         {
-            throw new NotImplementedException();
+            var accessor = GetAccessor<T>();
+
+            await accessor.DeleteEntitiesBatchAsync<T>(inputs.ToList());
         }
 
-        public async Task<IEnumerable<T>> FetchAll<T>(string groupKey) where T : IDataModel
+        public async Task<IEnumerable<T>> FetchAll<T>() where T : TableEntity, new()
         {
-            throw new NotImplementedException();
+            var accessor = GetAccessor<T>();
+
+            return await accessor.RetrieveEntitiesAsync<T>(null);
         }
 
-        public async Task Insert<T>(IEnumerable<T> inputs) where T : IDataModel
+        public async Task<IEnumerable<T>> FetchAll<T>(string partitionKey) where T : TableEntity, new()
         {
-            throw new NotImplementedException();
+            var accessor = GetAccessor<T>();
+
+            return await accessor.RetrieveEntitiesAsync<T>(partitionKey);
         }
 
-        public async Task Update<T>(IEnumerable<T> inputs) where T : IDataModel
+        public async Task Insert<T>(IEnumerable<T> inputs) where T : TableEntity, new()
         {
-            throw new NotImplementedException();
+            var accessor = GetAccessor<T>();
+
+            //TODO: this will stomp all entities that already exist :(
+            await accessor.InsertOrReplaceEntitiesBatchAsync<T>(inputs.ToList());
+        }
+
+        public async Task Update<T>(IEnumerable<T> inputs) where T : TableEntity, new()
+        {
+            var accessor = GetAccessor<T>();
+
+            await accessor.ReplaceEntitiesBatchAsync<T>(inputs.ToList());
         }
     }
 }
