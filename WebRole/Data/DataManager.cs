@@ -10,7 +10,7 @@ namespace WebRole.Data
 
         private DataManager()
         {
-            Provider = new TableStorageDataProvider(null);
+            Provider = new TableStorageDataProvider("UseDevelopmentStorage=true");
         }
 
         public TableStorageDataProvider Provider { get; private set; }
